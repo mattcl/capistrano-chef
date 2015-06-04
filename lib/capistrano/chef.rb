@@ -1,6 +1,2 @@
-require 'chef/config'
-require 'chef/knife'
-require 'chef/node'
-require 'chef/search/query'
-
+require 'json'
 self.extend Capistrano::DSL::Chef
