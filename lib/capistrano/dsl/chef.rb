@@ -12,7 +12,11 @@ module Capistrano
         knife_command =
           "knife search node '#{query}' -c #{@chef_config_path} -a ipaddress -F json"
 
-        raw_response = IO.popen(knife_command) { |io| io.read }
+        raw_response = nil
+        Bundler.with_clean_env do
+          raw_response = IO.popen(knife_command) { |io| io.read }
+        end
+
         response = JSON.parse(raw_response)
 
         return [] if response['rows'].empty?
